@@ -56,7 +56,7 @@ export default function Hero() {
 
     return (
         <motion.section
-            className="flex h-screen bg-black relative"
+            className="flex h-screen relative overflow-hidden bd"
             onClick={handleClick}
             style={{ backgroundImage: background }}
             onMouseMove={(e) => {
@@ -64,8 +64,8 @@ export default function Hero() {
                 mouseY.set(e.clientY);
             }}
         >
-            <div className="flex items-center justify-center w-1/2 h-full ">
-                <div className="animate-fade-in">
+            <div className="flex items-center justify-center w-1/2 h-full bd">
+                <div className="animate-fade-in bd">
                     <motion.h1
                         ref={h1Ref}
                         style={{ opacity: h1Opacity }}
@@ -75,46 +75,33 @@ export default function Hero() {
                         <br />
                         Ramirez
                     </motion.h1>
-                    <p>Full Stack Web Developer</p>
+                    <p className="font-monts">Full Stack Web Developer</p>
                 </div>
 
             </div>
+
+            <div className="absolute top-48 left-48 bg-inherit text-black/80 pointer-events-none">hideen</div>
             <div className="w-1/2 flex-1 flex flex-col px-10 items-start justify-center gap-10  ">
                 {/* Row 1 */}
-                <div className="flex gap-5">
-                    <TechCard icon={Icons.React} href="https://react.dev" label="React" tooltip="React – 3 yrs" />
-                    <TechCard icon={Icons.Tailwind} href="https://tailwindcss.com" label="Tailwind CSS" tooltip="Tailwind – daily use" />
-                    <TechCard icon={Icons.Framer} href="https://motion.dev" label="Framer Motion" tooltip="Motion – for animation" />
-                    <TechCard icon={Icons.Shad} href="https://ui.shadcn.com/" label="Framer Motion" tooltip="Motion – for animation" />
+                <div className="flex flex-col gap-5 bd">
+                    <p className="font-bebas tracking-widest">SERN</p>
+                    <div className="flex gap-5">
+                        <TechCard icon={Icons.React} href="https://react.dev" label="React" tooltip="React – 3 yrs" />
+                        <TechCard icon={Icons.Node} href="https://tailwindcss.com" label="Tailwind CSS" tooltip="Tailwind – daily use" />
+                        <TechCard
+                            icon={Icons.Express}
+                            href="https://expressjs.com/"
+                            label="Express"
+                            tooltip="Express – server framework"
+                        />
+                        <TechCard icon={Icons.PostSql} href="https://www.postgresql.org/" label="Postgre SQL" tooltip="For structured data management" />
+                    </div>
+
+                    <hr className="border-white/50 border w-full" />
+
+
                 </div>
 
-                {/* Row 2 */}
-                <div className="flex gap-5">
-                    <TechCard
-                        icon={Icons.Node}
-                        href="https://nodejs.org/en"
-                        label="Node.js"
-                        tooltip="Node.js – backend runtime"
-                    />
-                    <TechCard
-                        icon={Icons.Mongo}
-                        href="https://www.mongodb.com/"
-                        label="MongoDB"
-                        tooltip="MongoDB – NoSQL database"
-                    />
-                    <TechCard
-                        icon={Icons.Express}
-                        href="https://expressjs.com/"
-                        label="Express"
-                        tooltip="Express – server framework"
-                    />
-                    <TechCard
-                        icon={Icons.Socket}
-                        href="https://socket.io/"
-                        label="Socket.IO"
-                        tooltip="Socket.IO – real-time communication"
-                    />
-                </div>
 
             </div>
 

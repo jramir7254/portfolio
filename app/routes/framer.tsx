@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionValueEvent, stagger } from "motion/react"
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionValueEvent, stagger, animate } from "motion/react"
 import type { Dispatch, MouseEventHandler, ReactNode, SetStateAction } from 'react';
 import clsx from 'clsx';
 import { useEffect, useState, useRef } from 'react';
@@ -32,6 +32,10 @@ const SideBar = ({ children, setView, view }: SidebarProps) => {
                 <div>
                     <input onChange={handleChange} checked={view === 'bg'} type="radio" name='type' id='bg' value='bg' />
                     <label htmlFor="bg">Motion BG</label>
+                </div>
+                <div>
+                    <input onChange={handleChange} checked={view === 'card'} type="radio" name='type' id='card' value='card' />
+                    <label htmlFor="card">Motion Card</label>
                 </div>
             </fieldset>
             {children}
@@ -109,6 +113,7 @@ export default function framer() {
                         {view === "div" && <MotionDiv scroll={scrollYProgress} />}
                         {view === "h1" && <MotionText />}
                         {view === "bg" && <BG scroll={scrollYProgress} />}
+                        {view === "card" && <MotionCard />}
                     </div>
 
 
@@ -161,49 +166,94 @@ const MotionDiv = ({ scroll }) => {
         />
     )
 }
+const MotionCard = ({ }) => {
+
+    const variants = {
+        initial: { backgroundColor: "#9333ea" }, // Tailwind's purple-600
+        hover: { backgroundColor: "red" },
+    };
+    return (
+        <motion.div
+
+
+            whileHover={{
+                backgroundColor: 'blue',
+            }}
+            transition={{ duration: 5 }}
+            className="w-75 h-100 bg-purple-600 rounded-2xl"
+
+        >
+            <div>Items</div>
+        </motion.div >
+    )
+}
 
 
 
 
 const MotionText = () => {
-    const text = 'This is some text'
-
-    const container = {
-        hidden: { y: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                duration: 2,
-                delayChildren: stagger(0.1),
-                repeat: Infinity,
-                repeatType: 'loop',
-            }
-        }
-    }
-
-    const item = {
-        hidden: { y: 0 },
-        show: {
-            y: [0, -50, 0],
-            transition: {
-
-            }
-        }
-    }
-
     return (
         <motion.h1
-            variants={container}
-            initial="hidden"
-            animate="show"
-        >
-            {text.split("").map(char => (
-                <motion.span variants={item} className="inline-block">
-                    {char === " " ? "\u00A0" : char}
-                </motion.span>
-            ))}
+            initial={{
+                opacity: 0,
+                y: 100
+            }}
+            whileInView={{
+                opacity: 1,
+                y: 0
+            }}
+            viewport={{ once: true }}
 
+            transition={{
+                default: { type: "spring" },
+                opacity: { ease: 'easeOut' },
+
+                duration: 0.5
+            }}
+            className="text-5xl">
+            Test
         </motion.h1>
     )
 
 }
+
+
+// const text = 'This is some text'
+
+// const container = {
+//     hidden: { y: 0 },
+//     show: {
+//         opacity: 1,
+//         transition: {
+//             duration: 2,
+//             delayChildren: stagger(0.1),
+//             repeat: Infinity,
+//             repeatType: 'loop',
+//         }
+//     }
+// }
+
+// const item = {
+//     hidden: { y: 0 },
+//     show: {
+//         y: [0, -50, 0],
+//         transition: {
+
+//         }
+//     }
+// }
+
+// return (
+//     <motion.h1
+//         variants={container}
+//         initial="hidden"
+//         animate="show"
+//     >
+//         {text.split("").map(char => (
+//             <motion.span variants={item} className="inline-block">
+//                 {char === " " ? "\u00A0" : char}
+//             </motion.span>
+//         ))}
+
+//     </motion.h1>
+// )

@@ -2,7 +2,14 @@ import React from 'react';
 import { cn } from '~/lib/utils'; // Optional utility if you're using class merging
 import { motion } from 'motion/react';
 
-export default function TechCard({ icon: Icon, href, label, tooltip }) {
+type Props = {
+    icon: Object,
+    href?: string,
+    label?: string,
+    tooltip?: string
+}
+
+export default function TechCard({ icon: Icon, href, label, tooltip }: Props) {
     return (
         <motion.a href={href} target="_blank" rel="noopener noreferrer" className="group relative"
             whileHover={{ y: -10 }}
@@ -15,7 +22,7 @@ export default function TechCard({ icon: Icon, href, label, tooltip }) {
                     'flex items-center justify-center'
                 )}
             >
-                <Icon className="size-full object-contain text-white group-hover:scale-110 transition-transform" />
+                {Icon ? <Icon className="size-full object-contain text-white group-hover:scale-110 transition-transform" /> : <p>{label}</p>}
             </div>
 
             {tooltip && (

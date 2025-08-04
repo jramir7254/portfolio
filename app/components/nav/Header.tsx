@@ -12,7 +12,7 @@ export default function Header() {
             }
         >
             <div>
-                <h1>Jesus Ramirez</h1>
+                <p>Jesus Ramirez</p>
             </div>
             <nav className="flex gap-5">
                 <Link to="/">Home</Link>
